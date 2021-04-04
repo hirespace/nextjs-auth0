@@ -15,6 +15,12 @@ export {
 const serverSideOnly = (method: string): string => `The ${method} method can only be used from the server side`;
 
 const instance: SignInWithAuth0 = {
+  setSession() {
+    throw new Error(serverSideOnly('setSession'));
+  },
+  createSession() {
+    throw new Error(serverSideOnly('createSession'));
+  },
   getSession() {
     throw new Error(serverSideOnly('getSession'));
   },
