@@ -28,6 +28,8 @@ import {
 } from './handlers';
 import {
   sessionFactory,
+  setSessionFactory,
+  createSessionFactory,
   accessTokenFactory,
   SessionCache,
   GetSession,
@@ -73,6 +75,8 @@ export const initAuth0: InitAuth0 = (params) => {
   const baseHandleCallback = baseCallbackHandler(baseConfig, getClient, sessionCache, transientStore);
 
   // Init Next layer (with next config)
+  const createSession = createSessionFactory(sessionCache);
+  const setSession = setSessionFactory(sessionCache);
   const getSession = sessionFactory(sessionCache);
   const getAccessToken = accessTokenFactory(nextConfig, getClient, sessionCache);
   const withApiAuthRequired = withApiAuthRequiredFactory(sessionCache);
@@ -84,6 +88,8 @@ export const initAuth0: InitAuth0 = (params) => {
   const handleAuth = handlerFactory({ handleLogin, handleLogout, handleCallback, handleProfile });
 
   return {
+    createSession,
+    setSession,
     getSession,
     getAccessToken,
     withApiAuthRequired,

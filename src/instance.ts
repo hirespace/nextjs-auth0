@@ -1,4 +1,4 @@
-import { GetSession, GetAccessToken } from './session';
+import { GetSession, GetAccessToken, SetSession, CreateSession } from './session';
 import { WithApiAuthRequired, WithPageAuthRequired } from './helpers';
 import { HandleAuth, HandleCallback, HandleLogin, HandleLogout, HandleProfile } from './handlers';
 import { ConfigParameters } from './auth0-session';
@@ -13,6 +13,16 @@ import { ConfigParameters } from './auth0-session';
  * @category Server
  */
 export interface SignInWithAuth0 {
+  /**
+   * Session setter
+   */
+  setSession: SetSession;
+
+  /**
+   * Session getter
+   */
+  createSession:CreateSession;
+
   /**
    * Session getter
    */
